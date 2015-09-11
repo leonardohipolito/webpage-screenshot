@@ -26,22 +26,25 @@
     <div class="control-center">
       <label>Enter a webpage URL:</label>
       <input type="text" class="input-url" id="inputURL" value="http://">
-      <input type="submit" class="input-submit" id="submit" value="Generate Screenshot">
+      <input type="button" class="input-submit" id="submit" value="Generate Screenshot">
     </div>
     <div class="control-center">
       <label>OR Upload a webpage screenshot image:</label>
       <input type="file" class="input-submit" id="inputFile" multiple>
-      <a href="#" class="download-screenshot" id="downloadImage">Download</a>
+      <input type="button" class="download-screenshot" id="downloadImage" value="Download">
     </div>
   </div>
   <div class="wrap">
-    <div class="chrome-window">
-      <label class="url" id="screenshotURL"></label>
-      <div id="screenshotWrapper"></div>
+    <div class="screenshot-region">
+      <div class="chrome-window">
+        <label class="url" id="screenshotURL"></label>
+        <div id="screenshotWrapper"></div>
+      </div>
     </div>
   </div>
 
   <script src="js/jquery.min.js"></script>
+  <script src="js/html2canvas.js"></script>
   <script>
   $(document).ready(function() {
     var inputURL = $('#inputURL').val();
@@ -57,13 +60,39 @@
 
     $('#submit').click(function() {
       if (isUrlValid(inputURL)) {
-        var encodedURI = encodeURI('http://s.wordpress.com/mshots/v1/' + inputURL + '?w=1200');
-        $('#screenshotWrapper').html('<img class="screenshot" id="screenshotImage" src="' + encodedURI + '" alt="Screenshot Placeholder">');
-        $('#screenshotURL').text(encodeURI(inputURL));
+        //var encodedURI = encodeURI('http://s.wordpress.com/mshots/v1/' + inputURL + '?w=1200');
+        var encodedURI = encodeURI(inputURL);
+        $.ajax({
+          type: "GET",
+          url: "curl.php",
+          data: "requestURI=" + encodedURI,
+          dataType: "json",
+          success: function (data) {
+            //alert(data.base64);
+            $('#screenshotURL').html(inputURL);
+            $('#screenshotWrapper').html('<img class="screenshot" id="screenshotImage" src="data:image/png;base64,' + data.base64 + '" alt="Screenshot Placeholder">');
+          }
+        })
       } else {
         alert('Invalid URL!');
       }
     });
+
+    $('#inputFile').change(function() {
+      renderImage(this.files[0]);
+    });
+
+    $('#downloadImage').click(function() {
+      html2canvas($('.chrome-window'), {
+        allowTaint: true,
+        logging: true,
+        onrendered: function(canvas) {
+          var img = canvas.toDataURL();
+          window.open(img);
+        }
+      });
+    });
+
   });
 
   function isUrlValid(url) {
@@ -80,9 +109,24 @@
     reader.readAsDataURL(file);
   }
 
-  $('#inputFile').change(function() {
-    renderImage(this.files[0]);
-  });
+  // Code taken from MatthewCrumley (http://stackoverflow.com/a/934925/298479)
+  function getBase64Image(img) {
+      // Create an empty canvas element
+      var canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      // Copy the image contents to the canvas
+      var ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+
+      // Get the data-URL formatted image
+      // Firefox supports PNG and JPEG. You could check img.src to guess the
+      // original format, but be aware the using "image/jpg" will re-encode the image.
+      var dataURL = canvas.toDataURL("image/png");
+
+      return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+  }
   </script>
 </body>
 </html>
