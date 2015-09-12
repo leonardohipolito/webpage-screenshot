@@ -6,6 +6,10 @@ Webpage Screenshot Mockup Generator for Blog
 
 To create a webpage screenshot generater with a Google Chrome browser-like frame mockup to be used as a web screenshot image in a blog post or website content.
 
+### Note
+
+I have to use PHP cURL due to limitation in [html2canvas](http://html2canvas.hertzen.com/documentation.html) where all the images that the script uses need to reside under the [same origin](http://en.wikipedia.org/wiki/Same_origin_policy) for it to be able to read them without the assistance of a proxy.
+
 ### App Workflow
 
 1. User inserts a webpage URL.
@@ -21,10 +25,10 @@ To create a webpage screenshot generater with a Google Chrome browser-like frame
 * [ ] Create self-hosted web screenshot service. Currently using `http://s.wordpress.com/mshots/v1/` with image width `?w=1200`.
 * [ ] OR looking for better web screenshot API service?
 * [x] Generate/preview web screenshot in the Google Chrome browser-like frame mockup.
-* [ ] Upload web screenshot and preview in the Google Chrome browser-like frame mockup.
+* [x] Upload web screenshot and preview in the Google Chrome browser-like frame mockup.
 * [ ] A big button for download new generated screenshot with the Google Chrome browser-like frame mockup.
-* [ ] **Module for generating a new screenshot image with the Google Chrome browser-like frame mockup which able to select particular `div` element in the HTML DOM.**
-* [ ] Output new screenshot image in `PNG` format.
+* [x] **Module for generating a new screenshot image with the Google Chrome browser-like frame mockup which able to select particular `div` element in the HTML DOM.**
+* [x] Output new screenshot image in `PNG` format.
 
 ### Project Status
 
