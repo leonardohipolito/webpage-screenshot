@@ -19,6 +19,14 @@ I have to use PHP cURL due to limitation in [html2canvas](http://html2canvas.her
 3. Else, the webpage screenshot image will be auto-generated inside the Google Chrome browser-like frame mockup.
 4. User clicks on **Download Screenshot Mockup** button to download the new generated webpage screenshot together with the Google Chrome browser-like frame mockup.
 
+### Screenshots
+
+![Generator](generator.png)
+_The Generator_
+
+![Result](result.png)
+_The Final Result_
+
 ### TODO
 
 * [x] Google Chrome browser-like frame mockup as the screenshot wrapper.
