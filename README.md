@@ -27,11 +27,9 @@ I have to use PHP cURL due to limitation in [html2canvas](http://html2canvas.her
 * [ ] ~~OR looking for better web screenshot API service?~~
 * [x] Generate/preview web screenshot in the Google Chrome browser-like frame mockup.
 * [x] Upload web screenshot and preview in the Google Chrome browser-like frame mockup.
-<<<<<<< HEAD
 * [ ] A ~~big~~ special button for download new generated screenshot with the Google Chrome browser-like frame mockup.
 * [x] **Module for generating a new screenshot image with the Google Chrome browser-like frame mockup which able to select particular `div` element in the HTML DOM.**
 * [x] Output and download the new generated screenshot image in `PNG` format.
-=======
 
 ### Project Status
 
