@@ -1,8 +1,8 @@
-# webpage-screenshot
+# webpage-screenshot source code
 
 Webpage Screenshot Mockup Generator for Blog or Website Content
 
-**URL:** [http://wayi.me/webpage-screenshot](http://wayi.me/webpage-screenshot)
+~~**URL:** [http://wayi.me/webpage-screenshot](http://wayi.me/webpage-screenshot)~~
 
 ## The Idea
 
